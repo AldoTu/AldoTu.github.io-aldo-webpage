@@ -1,34 +1,38 @@
 # aldoturegano.com
 
-Sitio personal de **Aldo Turégano Montes** — Fundador y CEO de [EasyDesk](https://easydesk.mx).
+Personal website of **Aldo Turégano Montes** — Senior Data &amp; AI Leader based in Madrid
+(Fever · ex-Amazon, Audible &amp; P&G).
 
-Sitio estático (HTML + CSS + JS, sin build) alojado en **GitHub Pages** sobre el dominio
-[aldoturegano.com](https://aldoturegano.com). Diseño inspirado en la estética minimalista de
-[tomasmaillo.com](https://tomasmaillo.com): columna centrada, tipografía editorial (Fraunces) +
-Inter, acento naranja, modo claro/oscuro y animaciones de aparición.
+Static site (HTML + CSS + JS, no build step) hosted on **GitHub Pages** at
+[aldoturegano.com](https://aldoturegano.com). Minimalist design inspired by
+[tomasmaillo.com](https://tomasmaillo.com): centered column, editorial serif (Fraunces) +
+Inter, orange accent, light/dark theme and staggered reveal animations.
 
-## Estructura
+## Structure
 
-| Archivo        | Descripción                                             |
-| -------------- | ------------------------------------------------------- |
-| `index.html`   | Contenido y estructura de la página                     |
-| `styles.css`   | Estilos, tokens de color y temas (claro/oscuro)         |
-| `script.js`    | Toggle de tema, año dinámico e interacciones            |
-| `CNAME`        | Dominio personalizado de GitHub Pages                   |
+| File         | Description                                          |
+| ------------ | ---------------------------------------------------- |
+| `index.html` | Content and structure                                |
+| `styles.css` | Styles, color tokens and themes (light/dark)         |
+| `script.js`  | Theme toggle, dynamic year and interactions          |
+| `CNAME`      | Custom domain for GitHub Pages                        |
 
-## Cómo personalizar
+## Sections
 
-Busca los comentarios `TODO` y `data-placeholder` en `index.html`:
+Hero + bio · Experience (Fever, Amazon, Audible, P&G) · Ventures (EasyDesk) ·
+Education · Toolbox · Languages · Contact.
 
-- **Foto de perfil:** sustituye el `div.avatar` por `<img class="avatar" src="assets/aldo.jpg" alt="Aldo Turégano" />`.
-- **Redes:** LinkedIn y email ya son reales; cambia el `href="#"` de X (o añade
-  Instagram/GitHub) por tus URLs.
-- **Proyectos y escritos:** las tarjetas de esa sección son plantillas de ejemplo;
-  edítalas o elimínalas y duplica una `<a class="card">` para añadir más.
+## Personalize
 
-## Desarrollo local
+- **Profile photo:** replace the `div.avatar` with
+  `<img class="avatar" src="assets/aldo.jpg" alt="Aldo Turégano" />`.
+- **Links:** email, LinkedIn, GitHub and EasyDesk are all live in the socials row.
+- **Content:** experience, education, toolbox and languages come from the CV; edit any
+  card or `.tag` to adjust.
+
+## Local development
 
 ```bash
 python3 -m http.server 8000
-# abre http://localhost:8000
+# open http://localhost:8000
 ```

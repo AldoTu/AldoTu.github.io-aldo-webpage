@@ -313,6 +313,94 @@ a:hover {
   transform: translate(2px, -2px);
 }
 
+/* Icono que usa relleno en vez de trazo (p. ej. GitHub) */
+.i-fill {
+  fill: currentColor !important;
+  stroke: none !important;
+}
+
+.card__sub {
+  font-weight: 400;
+  font-size: 0.82em;
+  color: var(--muted);
+}
+
+/* ---------- Educación ---------- */
+.edu {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-card);
+  overflow: hidden;
+}
+.edu__item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 1.2rem;
+  border-bottom: 1px solid var(--border);
+}
+.edu__item:last-child {
+  border-bottom: none;
+}
+.edu__main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.edu__title {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 500;
+  font-size: 1.02rem;
+}
+.edu__org {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.edu__year {
+  flex-shrink: 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.cert {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 0.9rem;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+.cert svg {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ---------- Tags (toolbox / idiomas) ---------- */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.tag {
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  background: var(--bg-card);
+  font-size: 0.85rem;
+  color: var(--fg);
+  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+.tag:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
 /* ---------- Contacto ---------- */
 .section--contact {
   margin-top: 3.5rem;
