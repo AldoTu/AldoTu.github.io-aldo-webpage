@@ -1,0 +1,462 @@
+/* ============================================================
+   Aldo Turégano — sitio personal
+   Estética inspirada en tomasmaillo.com:
+   columna centrada, serif editorial + Inter, acento naranja,
+   modo claro/oscuro y animaciones fade-in escalonadas.
+   ============================================================ */
+
+:root {
+  --bg: #faf9f7;
+  --bg-card: #ffffff;
+  --fg: #1a1a19;
+  --muted: #6b6a67;
+  --border: #eceae5;
+  --accent: hsl(14 82% 55%);
+  --accent-soft: hsl(14 82% 55% / 0.12);
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.04), 0 8px 24px rgb(0 0 0 / 0.05);
+  --radius: 0.75rem;
+  --max: 768px;
+}
+
+[data-theme='dark'] {
+  --bg: #16150f;
+  --bg-card: #1e1d17;
+  --fg: #f3f1ea;
+  --muted: #9c9a90;
+  --border: #2b2a22;
+  --accent: hsl(14 84% 62%);
+  --accent-soft: hsl(14 84% 62% / 0.16);
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 10px 30px rgb(0 0 0 / 0.35);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  min-height: 100vh;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ---------- Acento de fondo fijo ---------- */
+.bg-accent {
+  position: fixed;
+  top: -18%;
+  left: 50%;
+  width: 120vw;
+  max-width: 1100px;
+  height: 480px;
+  transform: translateX(-50%);
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    var(--accent-soft) 0%,
+    transparent 70%
+  );
+  filter: blur(30px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ---------- Barra superior ---------- */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 1.1rem 1.5rem;
+  backdrop-filter: blur(8px);
+}
+
+.topbar__name {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 500;
+  font-size: 1.05rem;
+  color: var(--fg);
+}
+.topbar__name:hover {
+  text-decoration: none;
+  color: var(--accent);
+}
+
+.theme-toggle {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--bg-card);
+  color: var(--fg);
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.theme-toggle:hover {
+  border-color: var(--accent);
+  transform: rotate(-15deg);
+}
+.theme-toggle svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.icon-moon {
+  display: none;
+}
+[data-theme='dark'] .icon-sun {
+  display: none;
+}
+[data-theme='dark'] .icon-moon {
+  display: block;
+}
+
+/* ---------- Layout general ---------- */
+.page {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  padding: 1.5rem 0 3rem;
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, var(--accent), hsl(28 85% 60%));
+  color: #fff;
+  font-family: 'Fraunces', serif;
+  font-size: 1.6rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  object-fit: cover;
+  box-shadow: var(--shadow);
+  margin-bottom: 1.5rem;
+}
+
+.hero__title {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(2.6rem, 8vw, 4rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.1rem;
+}
+
+.hero__bio {
+  font-size: 1.12rem;
+  color: var(--muted);
+  max-width: 34rem;
+}
+.hero__bio a {
+  font-weight: 500;
+}
+
+/* ---------- Redes sociales ---------- */
+.socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.8rem;
+}
+.socials a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  background: var(--bg-card);
+  color: var(--fg);
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+.socials a:hover {
+  text-decoration: none;
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+.socials svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ---------- Secciones ---------- */
+.section {
+  margin-top: 2.75rem;
+}
+
+.section__label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+
+/* ---------- Tarjetas ---------- */
+.card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.1rem 1.2rem;
+  margin-bottom: 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-card);
+  color: var(--fg);
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover {
+  text-decoration: none;
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.card__icon {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.card__icon svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.card__body {
+  flex: 1;
+  min-width: 0;
+}
+.card__head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+.card__title {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 500;
+  font-size: 1.15rem;
+  line-height: 1.2;
+}
+.card__meta {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+.card__desc {
+  margin-top: 0.25rem;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+.card__arrow {
+  align-self: center;
+  color: var(--muted);
+  font-size: 1.1rem;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+.card:hover .card__arrow {
+  color: var(--accent);
+  transform: translate(2px, -2px);
+}
+
+/* Icono que usa relleno en vez de trazo (p. ej. GitHub) */
+.i-fill {
+  fill: currentColor !important;
+  stroke: none !important;
+}
+
+.card__sub {
+  font-weight: 400;
+  font-size: 0.82em;
+  color: var(--muted);
+}
+
+/* ---------- Educación ---------- */
+.edu {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-card);
+  overflow: hidden;
+}
+.edu__item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 1.2rem;
+  border-bottom: 1px solid var(--border);
+}
+.edu__item:last-child {
+  border-bottom: none;
+}
+.edu__main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.edu__title {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 500;
+  font-size: 1.02rem;
+}
+.edu__org {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.edu__year {
+  flex-shrink: 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.cert {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 0.9rem;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+.cert svg {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ---------- Tags (toolbox / idiomas) ---------- */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.tag {
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  background: var(--bg-card);
+  font-size: 0.85rem;
+  color: var(--fg);
+  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+.tag:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* ---------- Contacto ---------- */
+.section--contact {
+  margin-top: 3.5rem;
+  padding: 1.6rem 1.4rem;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+}
+.contact__text {
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 2rem 1.5rem 3rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+  text-align: center;
+}
+
+/* ---------- Animación de aparición ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: reveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: var(--d, 0ms);
+}
+@keyframes reveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 520px) {
+  .card__arrow {
+    display: none;
+  }
+  .socials a span {
+    display: none;
+  }
+  .socials a {
+    padding: 0.5rem;
+  }
+}
