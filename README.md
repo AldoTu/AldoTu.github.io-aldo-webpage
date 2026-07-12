@@ -21,7 +21,8 @@ Inter, acento naranja, modo claro/oscuro y animaciones de aparición.
 Busca los comentarios `TODO` y `data-placeholder` en `index.html`:
 
 - **Foto de perfil:** sustituye el `div.avatar` por `<img class="avatar" src="assets/aldo.jpg" alt="Aldo Turégano" />`.
-- **Redes:** cambia los `href="#"` de LinkedIn y X por tus URLs reales.
+- **Redes:** LinkedIn y email ya son reales; cambia el `href="#"` de X (o añade
+  Instagram/GitHub) por tus URLs.
 - **Proyectos y escritos:** las tarjetas de esa sección son plantillas de ejemplo;
   edítalas o elimínalas y duplica una `<a class="card">` para añadir más.
 
