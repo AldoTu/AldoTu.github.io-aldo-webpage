@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Allow: /assets/
+
+Sitemap: https://aldoturegano.com/sitemap.xml
