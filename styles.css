@@ -6,6 +6,7 @@
    ============================================================ */
 
 :root {
+  color-scheme: light;
   --bg: #faf9f7;
   --bg-card: #ffffff;
   --fg: #1a1a19;
@@ -19,6 +20,7 @@
 }
 
 [data-theme='dark'] {
+  color-scheme: dark;
   --bg: #16150f;
   --bg-card: #1e1d17;
   --fg: #f3f1ea;
@@ -37,6 +39,8 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -47,7 +51,43 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   min-height: 100vh;
-  transition: background 0.4s ease, color 0.4s ease;
+  min-height: 100dvh;
+  transition: background-color 0.4s ease, color 0.4s ease;
+  -webkit-tap-highlight-color: var(--accent-soft);
+}
+
+/* ---------- Accesibilidad ---------- */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.skip-link {
+  position: absolute;
+  left: max(1rem, env(safe-area-inset-left));
+  top: 0.75rem;
+  z-index: 100;
+  padding: 0.5rem 0.9rem;
+  border-radius: 100px;
+  background: var(--fg);
+  color: var(--bg);
+  font-size: 0.85rem;
+  font-weight: 500;
+  transform: translateY(-200%);
+  transition: transform 0.2s ease;
+}
+.skip-link:focus-visible {
+  transform: translateY(0);
+  text-decoration: none;
+}
+
+#main:focus {
+  outline: none;
+}
+
+.nowrap {
+  white-space: nowrap;
 }
 
 ::selection {
@@ -93,7 +133,8 @@ a:hover {
   justify-content: space-between;
   max-width: var(--max);
   margin: 0 auto;
-  padding: 1.1rem 1.5rem;
+  padding: max(1.1rem, env(safe-area-inset-top)) max(1.5rem, env(safe-area-inset-right)) 1.1rem
+    max(1.5rem, env(safe-area-inset-left));
   backdrop-filter: blur(8px);
 }
 
@@ -118,9 +159,11 @@ a:hover {
   background: var(--bg-card);
   color: var(--fg);
   cursor: pointer;
+  touch-action: manipulation;
   transition: border-color 0.2s ease, transform 0.2s ease;
 }
-.theme-toggle:hover {
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
   border-color: var(--accent);
   transform: rotate(-15deg);
 }
@@ -147,7 +190,7 @@ a:hover {
   z-index: 1;
   max-width: var(--max);
   margin: 0 auto;
-  padding: 2.5rem 1.5rem 4rem;
+  padding: 2.5rem max(1.5rem, env(safe-area-inset-right)) 4rem max(1.5rem, env(safe-area-inset-left));
 }
 
 /* ---------- Hero ---------- */
@@ -178,6 +221,15 @@ a:hover {
   font-size: clamp(2.6rem, 8vw, 4rem);
   line-height: 1.02;
   letter-spacing: -0.02em;
+  margin-bottom: 0.6rem;
+  text-wrap: balance;
+}
+
+.hero__role {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--accent);
   margin-bottom: 1.1rem;
 }
 
@@ -185,6 +237,7 @@ a:hover {
   font-size: 1.12rem;
   color: var(--muted);
   max-width: 34rem;
+  text-wrap: pretty;
 }
 .hero__bio a {
   font-weight: 500;
@@ -208,9 +261,11 @@ a:hover {
   color: var(--fg);
   font-size: 0.85rem;
   font-weight: 500;
+  touch-action: manipulation;
   transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
-.socials a:hover {
+.socials a:hover,
+.socials a:focus-visible {
   text-decoration: none;
   border-color: var(--accent);
   color: var(--accent);
@@ -227,6 +282,7 @@ a:hover {
 /* ---------- Secciones ---------- */
 .section {
   margin-top: 2.75rem;
+  scroll-margin-top: 5rem;
 }
 
 .section__label {
@@ -251,7 +307,9 @@ a:hover {
   color: var(--fg);
   transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
-.card:hover {
+/* Solo las tarjetas enlazadas reaccionan al hover: sin falsas affordances */
+.card--link:hover,
+.card--link:focus-visible {
   text-decoration: none;
   border-color: var(--accent);
   transform: translateY(-2px);
@@ -306,11 +364,40 @@ a:hover {
 .card__meta {
   font-size: 0.78rem;
   color: var(--muted);
+  font-variant-numeric: tabular-nums;
 }
 .card__desc {
   margin-top: 0.25rem;
   font-size: 0.92rem;
   color: var(--muted);
+  text-wrap: pretty;
+}
+
+.card__list {
+  margin-top: 0.4rem;
+  padding-left: 1.1rem;
+  font-size: 0.92rem;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+.card__list li + li {
+  margin-top: 0.3rem;
+}
+.card__list li::marker {
+  color: var(--accent);
+}
+
+.card__role {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-top: 0.9rem;
+}
+.card__role-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--fg);
 }
 
 .card__arrow {
@@ -319,7 +406,8 @@ a:hover {
   font-size: 1.1rem;
   transition: transform 0.2s ease, color 0.2s ease;
 }
-.card:hover .card__arrow {
+.card--link:hover .card__arrow,
+.card--link:focus-visible .card__arrow {
   color: var(--accent);
   transform: translate(2px, -2px);
 }
@@ -363,10 +451,13 @@ a:hover {
   font-family: 'Fraunces', Georgia, serif;
   font-weight: 500;
   font-size: 1.02rem;
+  line-height: 1.35;
+  text-wrap: balance;
 }
 .edu__org {
   font-size: 0.85rem;
   color: var(--muted);
+  font-variant-numeric: tabular-nums;
 }
 .edu__year {
   flex-shrink: 0;
@@ -384,6 +475,7 @@ a:hover {
   color: var(--muted);
 }
 .cert svg {
+  flex-shrink: 0;
   fill: none;
   stroke: var(--accent);
   stroke-width: 1.6;
@@ -391,11 +483,25 @@ a:hover {
   stroke-linejoin: round;
 }
 
-/* ---------- Tags (toolbox / idiomas) ---------- */
+/* ---------- Skills ---------- */
+.skills {
+  display: grid;
+  gap: 1.1rem;
+}
+.skills__title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--fg);
+  margin-bottom: 0.5rem;
+}
+
+/* ---------- Tags (skills / idiomas) ---------- */
+/* Etiquetas estáticas: sin hover para no parecer interactivas */
 .tags {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  list-style: none;
 }
 .tag {
   padding: 0.35rem 0.8rem;
@@ -404,12 +510,6 @@ a:hover {
   background: var(--bg-card);
   font-size: 0.85rem;
   color: var(--fg);
-  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
-}
-.tag:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  transform: translateY(-2px);
 }
 
 /* ---------- Contacto ---------- */
@@ -422,13 +522,14 @@ a:hover {
 .contact__text {
   color: var(--muted);
   font-size: 1rem;
+  text-wrap: pretty;
 }
 
 /* ---------- Footer ---------- */
 .footer {
   max-width: var(--max);
   margin: 0 auto;
-  padding: 2rem 1.5rem 3rem;
+  padding: 2rem 1.5rem max(3rem, env(safe-area-inset-bottom));
   color: var(--muted);
   font-size: 0.82rem;
   text-align: center;
@@ -454,6 +555,11 @@ a:hover {
     transform: none;
     animation: none;
   }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
   html {
     scroll-behavior: auto;
   }
@@ -464,10 +570,24 @@ a:hover {
   .card__arrow {
     display: none;
   }
-  .socials a span {
-    display: none;
+  /* Solo icono en móvil, pero el nombre accesible se conserva */
+  .socials__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
   .socials a {
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
     padding: 0.5rem;
+  }
+  .theme-toggle {
+    width: 44px;
+    height: 44px;
   }
 }
