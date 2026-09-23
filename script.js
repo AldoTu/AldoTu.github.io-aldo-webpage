@@ -25,13 +25,19 @@
 
   function applyTheme(theme) {
     root.setAttribute('data-theme', theme);
-    var meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', theme === 'dark' ? '#16150f' : '#faf9f7');
+    // La barra del navegador sigue al tema elegido, no solo al del sistema
+    var color = theme === 'dark' ? '#16150f' : '#faf9f7';
+    document.querySelectorAll('meta[name="theme-color"]').forEach(function (meta) {
+      meta.setAttribute('content', color);
+    });
+    var toggle = document.getElementById('theme-toggle');
+    if (toggle) toggle.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
   }
 
-  applyTheme(preferredTheme());
+  // El script se carga con defer: el DOM ya está listo
+  (function () {
+    applyTheme(preferredTheme());
 
-  document.addEventListener('DOMContentLoaded', function () {
     var toggle = document.getElementById('theme-toggle');
     if (toggle) {
       toggle.addEventListener('click', function () {
@@ -59,12 +65,5 @@
     // Año dinámico en el footer
     var year = document.getElementById('year');
     if (year) year.textContent = new Date().getFullYear();
-
-    // Los enlaces marcados como plantilla no navegan (evita saltos molestos)
-    document.querySelectorAll('a[data-placeholder]').forEach(function (link) {
-      link.addEventListener('click', function (e) {
-        if (link.getAttribute('href') === '#') e.preventDefault();
-      });
-    });
-  });
+  })();
 })();
